@@ -1,0 +1,4 @@
+id;owner;jhi_to;subject;created_date;last_message_date;type
+1;user1@my.com;user2@my.com;-;2021-02-26;2021-02-26;NOTIFICATION
+2;user3@my.com;user1@my.com;-;2021-02-25;2021-02-26;NOTIFICATION
+3;user1@my.com;user4@my.com;-;2021-02-26;2021-02-25;NOTIFICATION

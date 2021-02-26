@@ -1,0 +1,41 @@
+
+enum ChatType {
+    NOTIFICATION
+}
+
+entity Chat {
+	owner String,
+	to String,
+    subject String,
+    createdDate LocalDate,
+    lastMessageDate LocalDate,
+    type ChatType
+}
+
+entity Message {
+	from String,
+    to String,
+    body String,
+    order Long,
+    emittedDate LocalDate,
+    receivedDate LocalDate,
+    readDate LocalDate,
+	latitude Double,
+    longitud Double
+    }
+
+relationship OneToMany {
+	Chat to Message
+}
+// Set pagination options
+paginate Chat, Message  with infinite-scroll
+//paginate Job with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl //except Employee, Job
+
+// Set an angular suffix
+angularSuffix * with mySuffix

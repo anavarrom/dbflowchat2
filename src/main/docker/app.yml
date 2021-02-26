@@ -1,0 +1,46 @@
+version: '2'
+services:
+  dbflowchat2-app:
+    image: dbflowchat2
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_CLOUD_CONSUL_HOST=consul
+      - SPRING_CLOUD_CONSUL_PORT=8500
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbflowchat2-postgresql:5432/dbflowchat2
+      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=internal
+      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=internal
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://dbflowchat2-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://dbflowchat2-elasticsearch:9200
+      - KAFKA_BOOTSTRAPSERVERS=kafka:9092
+  dbflowchat2-postgresql:
+    extends:
+      file: postgresql.yml
+      service: dbflowchat2-postgresql
+  dbflowchat2-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: dbflowchat2-elasticsearch
+  kafka:
+    extends:
+      file: kafka.yml
+      service: kafka
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+  zookeeper:
+    extends:
+      file: kafka.yml
+      service: zookeeper
+  consul:
+    extends:
+      file: consul.yml
+      service: consul
+
+  consul-config-loader:
+    extends:
+      file: consul.yml
+      service: consul-config-loader

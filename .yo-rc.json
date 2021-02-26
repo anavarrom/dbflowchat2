@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "dbflow.chat",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.10.3",
+    "applicationType": "microservice",
+    "baseName": "dbflowchat2",
+    "packageName": "dbflow.chat",
+    "packageFolder": "dbflow/chat",
+    "serverPort": "8083",
+    "authenticationType": "oauth2",
+    "cacheProvider": "no",
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "consul",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NjA4OTcyNDdiNDNmNzZhYWEzYzBmNDZjNzI5NWRmMzQ3NzJkNjJhOTUwZDg1MzU4ODFjNGRlOTc1NzFiOTc2ZTQyYjRkZTBhZDgwMjhkZDI4OTViZTIzNTlmMzA1OWIzOTkzMDVlMjE5YmJhN2IxODBlNDBjM2EzNTJhM2Q4MDQ=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1604062368700,
+    "testFrameworks": ["cucumber"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "en",
+    "languages": ["en", "es"],
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

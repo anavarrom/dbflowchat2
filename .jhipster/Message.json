@@ -1,0 +1,63 @@
+{
+  "name": "Message",
+  "fields": [
+    {
+      "fieldName": "from",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "to",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "body",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "order",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "emittedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "receivedDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "readDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "longitud",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "chat",
+      "otherEntityRelationshipName": "message",
+      "relationshipName": "chat",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210226102956",
+  "entityTableName": "message",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "dbflowchat2",
+  "applications": "*",
+  "microserviceName": "dbflowchat2",
+  "angularJSSuffix": "mySuffix"
+}
