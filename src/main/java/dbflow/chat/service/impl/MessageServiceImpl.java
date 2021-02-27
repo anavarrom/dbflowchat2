@@ -66,7 +66,12 @@ public class MessageServiceImpl implements MessageService {
             .map(messageMapper::toDto);
     }
 
-    @Override
+	@Override
+	public Page<MessageDTO> findAllByChat(Long chatId, Pageable pageable) {
+		// TODO Auto-generated method stub
+        return messageRepository.findAllByChatId(chatId, pageable).map(messageMapper::toDto);
+	}
+	@Override
     public void delete(Long id) {
         log.debug("Request to delete Message : {}", id);
         messageRepository.deleteById(id);
@@ -80,4 +85,5 @@ public class MessageServiceImpl implements MessageService {
         return messageSearchRepository.search(queryStringQuery(query), pageable)
             .map(messageMapper::toDto);
     }
+
 }

@@ -1,7 +1,9 @@
 package dbflow.chat.web.rest;
 
+import dbflow.chat.security.SecurityUtils;
 import dbflow.chat.service.MessageService;
 import dbflow.chat.web.rest.errors.BadRequestAlertException;
+import dbflow.chat.service.dto.ChatDTO;
 import dbflow.chat.service.dto.MessageDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -53,7 +55,7 @@ public class MessageResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new messageDTO, or with status {@code 400 (Bad Request)} if the message has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/messages")
+    @PostMapping("/message")
     public ResponseEntity<MessageDTO> createMessage(@RequestBody MessageDTO messageDTO) throws URISyntaxException {
         log.debug("REST request to save Message : {}", messageDTO);
         if (messageDTO.getId() != null) {
@@ -74,7 +76,7 @@ public class MessageResource {
      * or with status {@code 500 (Internal Server Error)} if the messageDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/messages")
+    @PutMapping("/message")
     public ResponseEntity<MessageDTO> updateMessage(@RequestBody MessageDTO messageDTO) throws URISyntaxException {
         log.debug("REST request to update Message : {}", messageDTO);
         if (messageDTO.getId() == null) {
@@ -92,7 +94,7 @@ public class MessageResource {
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of messages in body.
      */
-    @GetMapping("/messages")
+    @GetMapping("/message")
     public ResponseEntity<List<MessageDTO>> getAllMessages(Pageable pageable) {
         log.debug("REST request to get a page of Messages");
         Page<MessageDTO> page = messageService.findAll(pageable);
@@ -101,12 +103,24 @@ public class MessageResource {
     }
 
     /**
+     * {@code GET  /chats} : get all the user appointments.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of appointments in body.
+     */
+    @GetMapping("/message/findByChat/{id}")
+    public ResponseEntity<List<MessageDTO>> getAllByChat(@PathVariable Long id, Pageable pageable) { 
+       Page<MessageDTO> page = messageService.findAllByChat(id, pageable);
+       HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+       return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }  
+    /**
      * {@code GET  /messages/:id} : get the "id" message.
      *
      * @param id the id of the messageDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the messageDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/messages/{id}")
+    @GetMapping("/message/{id}")
     public ResponseEntity<MessageDTO> getMessage(@PathVariable Long id) {
         log.debug("REST request to get Message : {}", id);
         Optional<MessageDTO> messageDTO = messageService.findOne(id);
@@ -119,7 +133,7 @@ public class MessageResource {
      * @param id the id of the messageDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/messages/{id}")
+    @DeleteMapping("/message/{id}")
     public ResponseEntity<Void> deleteMessage(@PathVariable Long id) {
         log.debug("REST request to delete Message : {}", id);
         messageService.delete(id);

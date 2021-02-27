@@ -1,5 +1,6 @@
 package dbflow.chat.service;
 
+import dbflow.chat.service.dto.ChatDTO;
 import dbflow.chat.service.dto.MessageDTO;
 
 import org.springframework.data.domain.Page;
@@ -37,6 +38,14 @@ public interface MessageService {
      */
     Optional<MessageDTO> findOne(Long id);
 
+    /**
+     * Get all the user chats
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<MessageDTO> findAllByChat(Long chatId, Pageable pageable);
+    
     /**
      * Delete the "id" message.
      *
